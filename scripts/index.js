@@ -78,4 +78,5 @@ const loadTreeByCategory = (id) => {
     .then((res) => res.json())
     .then((data) => displayTreeCards(data));
 };
+
 loadCategories();
