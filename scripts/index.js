@@ -12,17 +12,27 @@ const displayCategories = (categories) => {
   categories.forEach((category) => {
     const div = document.createElement("div");
     div.className =
-      "menu bg-[#f0fdf4] rounded-box w-56 mx-auto lg:mx-0 text-center lg:text-left";
+      "categories menu bg-[#f0fdf4] rounded-box w-56 mx-auto lg:mx-0 text-center lg:text-left";
     div.innerHTML = `
            
             
-              <a  class="hover:bg-[#15803d] hover:text-white p-2 hover:rounded-sm cursor-pointer"> ${category.category_name} </a>
+              <a  class="hover:bg-[#15803d] categories hover:text-white p-2 hover:rounded-sm cursor-pointer"> ${category.category_name} </a>
             
           
   `;
     categoryContainer.appendChild(div);
   });
   loadTreeCards(categories);
+
+  categoryContainer.addEventListener("click", (e) => {
+    categoryContainer.querySelectorAll(".categories").forEach((category) => {
+      category.classList.remove("bg-[#15803d]", "text-white", "rounded-sm");
+    });
+
+    if (e.target.localName === "a") {
+      e.target.classList.add("bg-[#15803d]", "text-white", "rounded-sm");
+    }
+  });
 };
 const loadTreeCards = () => {
   fetch(`https://openapi.programming-hero.com/api/plants`)
