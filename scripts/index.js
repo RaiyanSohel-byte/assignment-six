@@ -42,7 +42,7 @@ const displayTreeCards = (treeDetails) => {
                ${plant.description}
               </p>
               <div class="flex justify-between items-center">
-                <div class="badge bg-[#dcfce7] text-[#15803D] mt-[10px]">
+                <div class="badge bg-[#dcfce7] text-[#15803D] text-xs mt-[10px]">
                   ${plant.category}
                 </div>
                 <div class="mt-[10px] font-bold"><p>৳${plant.price}</p></div>
