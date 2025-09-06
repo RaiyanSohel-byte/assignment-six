@@ -12,7 +12,7 @@
    Ans: Arrow Function is a shorter way to write function in Javascript. We use '=>' syntax to write the arrow function. Arrow function does not have it's own 'this'.
 
 4. How does destructuring assignment work in ES6?
-   Ans: Using destructuring assignment, we can get values from an array directly using variables. We can also get properties from an object directly using variables by destructuring assignment.
+   Ans: Using destructuring assignment, we can get values from an array directly using variables. We can also get values from an object by property name directly by destructuring assignment.
    Example: const [one,two,three] = ["Alim","Jalim","Dalim"];
 
 5. Explain template literals in ES6. How are they different from string concatenation?
