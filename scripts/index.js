@@ -22,23 +22,23 @@ const displayCategories = (categories) => {
   `;
     categoryContainer.appendChild(div);
   });
-  loadTreeDetails(categories);
+  loadTreeCards(categories);
 };
-const loadTreeDetails = () => {
+const loadTreeCards = () => {
   fetch(`https://openapi.programming-hero.com/api/plants`)
     .then((res) => res.json())
-    .then((data) => displayTreeDetails(data));
+    .then((data) => displayTreeCards(data));
 };
-const displayTreeDetails = (treeDetails) => {
+const displayTreeCards = (treeDetails) => {
   console.log(treeDetails);
   const cardGrid = document.getElementById("card-grid");
   treeDetails.plants.forEach((plant) => {
     const div = document.createElement("div");
-    div.className = "card bg-base-100 w-80 shadow-sm mx-auto";
+    div.className = "card bg-base-100 lg:w-80 shadow-sm mx-auto";
     div.innerHTML = `      <figure class="px-5 py-5"><img class="rounded-[8px] w-[311px] h-[186px] " src="${plant.image}" alt="" /></figure>
             <div class="card body px-5 py-5">
               <h2 class="card title text-[14px] font-semibold">${plant.name}</h2>
-              <p class="text-[12px]">
+              <p class="text-[12px] lg:h-[78px]">
                ${plant.description}
               </p>
               <div class="flex justify-between items-center">
@@ -56,4 +56,5 @@ const displayTreeDetails = (treeDetails) => {
     cardGrid.appendChild(div);
   });
 };
+
 loadCategories();
