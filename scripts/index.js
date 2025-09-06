@@ -10,13 +10,15 @@ const loadCategories = () => {
 const displayCategories = (categories) => {
   const categoryContainer = document.getElementById("categories-container");
   categories.forEach((category) => {
+    // console.log(category.id);
     const div = document.createElement("div");
     div.className =
       "categories menu bg-[#f0fdf4] rounded-box w-56 mx-auto lg:mx-0 text-center lg:text-left";
+
     div.innerHTML = `
            
             
-              <a  class="hover:bg-[#15803d] categories hover:text-white p-2 hover:rounded-sm cursor-pointer"> ${category.category_name} </a>
+              <a id="${category.id}" class="hover:bg-[#15803d] categories hover:text-white p-2 hover:rounded-sm cursor-pointer"> ${category.category_name} </a>
             
           
   `;
@@ -31,20 +33,25 @@ const displayCategories = (categories) => {
 
     if (e.target.localName === "a") {
       e.target.classList.add("bg-[#15803d]", "text-white", "rounded-sm");
+      //   console.log(e.target.id);
+      loadTreeByCategory(e.target.id);
     }
   });
 };
 const loadTreeCards = () => {
   fetch(`https://openapi.programming-hero.com/api/plants`)
     .then((res) => res.json())
-    .then((data) => displayTreeCards(data));
+    .then((data) => {
+      displayTreeCards(data);
+    });
 };
 const displayTreeCards = (treeDetails) => {
   console.log(treeDetails);
   const cardGrid = document.getElementById("card-grid");
+  cardGrid.innerHTML = "";
   treeDetails.plants.forEach((plant) => {
     const div = document.createElement("div");
-    div.className = "card bg-base-100 lg:w-80 shadow-sm mx-auto";
+    div.className = "card bg-base-100 h-[450px] lg:w-80 shadow-sm mx-auto";
     div.innerHTML = `      <figure class="px-5 py-5"><img class="rounded-[8px] w-[311px] h-[186px] " src="${plant.image}" alt="" /></figure>
             <div class="card body px-5 py-5">
               <h2 class="card title text-[14px] font-semibold">${plant.name}</h2>
@@ -66,5 +73,9 @@ const displayTreeCards = (treeDetails) => {
     cardGrid.appendChild(div);
   });
 };
-
+const loadTreeByCategory = (id) => {
+  fetch(`https://openapi.programming-hero.com/api/category/${id}`)
+    .then((res) => res.json())
+    .then((data) => displayTreeCards(data));
+};
 loadCategories();
