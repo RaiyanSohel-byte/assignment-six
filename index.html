@@ -112,6 +112,7 @@
       <h3 class="text-center text-4xl font-semibold mb-[20px] lg:mb-[40px]">
         Choose Your Trees
       </h3>
+
       <div id="cards-container" class="lg:flex justify-center gap-3">
         <!-- categories -->
         <div class="bg-[#f0fdf4]">
@@ -138,6 +139,10 @@
 
         <!-- cards -->
         <div class="lg:flex gap-3">
+          <!-- loading spinner -->
+          <div id="spinner" class="lg:w-[880px] flex justify-center hidden">
+            <span class="loading loading-spinner loading-xl"></span>
+          </div>
           <div
             id="card-grid"
             class="grid grid-cols-1 lg:grid-cols-3 gap-5"

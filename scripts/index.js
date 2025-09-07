@@ -1,5 +1,13 @@
 const cardsContainer = document.getElementById("cards-container");
-
+const manageSpinner = (status) => {
+  if (status === true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("card-grid").classList.add("hidden");
+  } else {
+    document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("card-grid").classList.remove("hidden");
+  }
+};
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
@@ -44,6 +52,7 @@ const displayCategories = (categories) => {
   });
 };
 const loadTreeCards = () => {
+  manageSpinner(true);
   fetch(`https://openapi.programming-hero.com/api/plants`)
     .then((res) => res.json())
     .then((data) => {
@@ -52,6 +61,7 @@ const loadTreeCards = () => {
 };
 const displayTreeCards = (treeDetails) => {
   // console.log(treeDetails);
+
   const cardGrid = document.getElementById("card-grid");
   cardGrid.innerHTML = "";
   treeDetails.plants.forEach((plant) => {
@@ -77,8 +87,10 @@ const displayTreeCards = (treeDetails) => {
             </div>`;
     cardGrid.appendChild(div);
   });
+  manageSpinner(false);
 };
 const loadTreeByCategory = (id) => {
+  manageSpinner(true);
   fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
     .then((data) => {
