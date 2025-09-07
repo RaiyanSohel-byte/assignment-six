@@ -122,13 +122,16 @@ const displayModal = (data) => {
   modal.appendChild(div);
   my_modal_5.showModal();
 };
+
+let price = 0;
 const addToCart = (id) => {
-  console.log(id);
+  // console.log(id);
   fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      const cartContainer = document.getElementById("cart-container");
+      // console.log(data);
+
+      const cartDetails = document.getElementById("cart-details");
 
       const div = document.createElement("div");
       div.className =
@@ -140,7 +143,12 @@ const addToCart = (id) => {
                 <div class="text-gray-500">
                   <a><i class="fa-solid fa-xmark cursor-pointer"></i></a>
                 </div>`;
-      cartContainer.appendChild(div);
+      cartDetails.appendChild(div);
+      const cartTreePrice = document.getElementById("cart-tree-price");
+      price += data.plants.price;
+
+      // console.log(price);
+      cartTreePrice.innerText = `৳${price}`;
     });
 };
 loadCategories();
