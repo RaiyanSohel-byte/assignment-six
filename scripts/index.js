@@ -56,7 +56,7 @@ const displayTreeCards = (treeDetails) => {
   cardGrid.innerHTML = "";
   treeDetails.plants.forEach((plant) => {
     const div = document.createElement("div");
-    div.className = "card bg-base-100 h-[450px] lg:w-70 shadow-sm mx-auto";
+    div.className = "card bg-base-100 h-[450px] w-70 shadow-sm mx-auto";
     div.innerHTML = `      <figure class="px-2 py-2 lg:px-5 lg:py-5"><img class="rounded-[8px] w-[311px] h-[186px] " src="${plant.image}" alt="" /></figure>
             <div class="card body px-5 py-5">
               <h2 onclick="loadModal(${plant.id})" class="card title text-[14px] cursor-pointer font-semibold">${plant.name}</h2>
@@ -67,10 +67,10 @@ const displayTreeCards = (treeDetails) => {
                 <div class="badge bg-[#dcfce7] text-[#15803D] text-xs mt-[20px]">
                   ${plant.category}
                 </div>
-                <div class="mt-[10px] font-bold"><p>৳${plant.price}</p></div>
+                <div class="mt-[20px] font-bold"><p>৳${plant.price}</p></div>
               </div>
               <div class="card actions mt-[10px]">
-                <button class="btn btn-primary rounded-3xl bg-[#15803D]">
+                <button onclick="addToCart(${plant.id})" class="btn btn-primary rounded-3xl bg-[#15803D]">
                   Add To Cart
                 </button>
               </div>
@@ -121,5 +121,26 @@ const displayModal = (data) => {
         </div>`;
   modal.appendChild(div);
   my_modal_5.showModal();
+};
+const addToCart = (id) => {
+  console.log(id);
+  fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      const cartContainer = document.getElementById("cart-container");
+
+      const div = document.createElement("div");
+      div.className =
+        "mb-[10px] bg-[#f0fdf4] p-4 flex justify-between items-center";
+      div.innerHTML = ` <div class="">
+                  <a class="font-bold">${data.plants.name}</a>
+                  <p class="text-gray-500">৳${data.plants.price} x 1</p>
+                </div>
+                <div class="text-gray-500">
+                  <a><i class="fa-solid fa-xmark cursor-pointer"></i></a>
+                </div>`;
+      cartContainer.appendChild(div);
+    });
 };
 loadCategories();
