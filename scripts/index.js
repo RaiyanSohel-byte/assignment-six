@@ -57,7 +57,7 @@ const displayTreeCards = (treeDetails) => {
   treeDetails.plants.forEach((plant) => {
     const div = document.createElement("div");
     div.className = "card bg-base-100 h-[450px] lg:w-70 shadow-sm mx-auto";
-    div.innerHTML = `      <figure class="px-5 py-5"><img class="rounded-[8px] w-[311px] h-[186px] " src="${plant.image}" alt="" /></figure>
+    div.innerHTML = `      <figure class="px-2 py-2 lg:px-5 lg:py-5"><img class="rounded-[8px] w-[311px] h-[186px] " src="${plant.image}" alt="" /></figure>
             <div class="card body px-5 py-5">
               <h2 onclick="loadModal(${plant.id})" class="card title text-[14px] cursor-pointer font-semibold">${plant.name}</h2>
               <p class="text-[12px] lg:h-[78px]">
@@ -101,7 +101,7 @@ const displayModal = (data) => {
   div.innerHTML = `<h3 class="text-xl font-bold">${data.name}</h3>
         <div class="w-full h-[250px] mt-[20px]">
           <img
-            class="w-full h-full object-cover rounded-md"
+            class="w-full h-full rounded-md"
             src="${data.image}"
             alt=""
           />
