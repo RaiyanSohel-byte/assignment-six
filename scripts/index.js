@@ -132,7 +132,7 @@ const displayModal = (data) => {
           </form>
         </div>`;
   modal.appendChild(div);
-  my_modal_5.showModal();
+  modal.showModal();
 };
 
 let price = 0;
