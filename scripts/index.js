@@ -123,47 +123,43 @@ const displayModal = (data) => {
   my_modal_5.showModal();
 };
 
-let count = 0;
-let items = [];
+let price = 0;
+
 const addToCart = (id) => {
   // console.log(id);
   fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
     .then((res) => res.json())
     .then((data) => {
       // console.log(data);
-      // items = items.filter((item) => item.id !== data.plants.id);
 
-      items.push({
-        id: data.plants.id,
-        name: data.plants.name,
-        price: data.plants.price,
-        quantity: 1,
-      });
+      const cartDetails = document.getElementById("cart-details");
 
-      displayCartItems(items);
-    });
-};
-const displayCartItems = (items) => {
-  console.log(items);
-  const cartDetails = document.getElementById("cart-details");
-  cartDetails.innerHTML = "";
-  let price = 0;
-  items.forEach((item) => {
-    price += item.price;
-
-    const div = document.createElement("div");
-    div.setAttribute("id", `cart-div-${item.id}`);
-    div.className =
-      "mb-[10px] bg-[#f0fdf4] p-4 flex justify-between items-center";
-    div.innerHTML = ` <div class="">
-                  <a class="font-bold">${item.name}</a>
-                  <p class="text-gray-500">৳${item.price} x 1</p>
+      const div = document.createElement("div");
+      div.setAttribute("id", `cart-div-${data.plants.id}`);
+      div.className =
+        "mb-[10px] bg-[#f0fdf4] p-4 flex justify-between items-center";
+      div.innerHTML = ` <div class="">
+                  <a class="font-bold">${data.plants.name}</a>
+                  <p class="text-gray-500">৳${data.plants.price}</p>
                 </div>
                 <div class="text-gray-500">
-                  <a id="delete-button-${item.id}"><i class="fa-solid fa-xmark cursor-pointer"></i></a>
+                  <a id="delete-button-${data.plants.id}"><i class="fa-solid fa-xmark cursor-pointer"></i></a>
                 </div>`;
-    cartDetails.appendChild(div);
-  });
-  document.getElementById("cart-tree-price").innerText = `৳${price}`;
+      cartDetails.appendChild(div);
+      const cartTreePrice = document.getElementById("cart-tree-price");
+
+      price += data.plants.price;
+
+      // console.log(price);
+      cartTreePrice.innerText = `৳${price}`;
+      document
+        .getElementById(`delete-button-${data.plants.id}`)
+        .addEventListener("click", () => {
+          document.getElementById(`cart-div-${data.plants.id}`).remove();
+          price = price - data.plants.price;
+          cartTreePrice.innerText = `৳${price}`;
+          console.log(price);
+        });
+    });
 };
 loadCategories();
