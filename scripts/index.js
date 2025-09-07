@@ -51,7 +51,7 @@ const loadTreeCards = () => {
     });
 };
 const displayTreeCards = (treeDetails) => {
-  console.log(treeDetails);
+  // console.log(treeDetails);
   const cardGrid = document.getElementById("card-grid");
   cardGrid.innerHTML = "";
   treeDetails.plants.forEach((plant) => {
@@ -59,7 +59,7 @@ const displayTreeCards = (treeDetails) => {
     div.className = "card bg-base-100 h-[450px] lg:w-70 shadow-sm mx-auto";
     div.innerHTML = `      <figure class="px-5 py-5"><img class="rounded-[8px] w-[311px] h-[186px] " src="${plant.image}" alt="" /></figure>
             <div class="card body px-5 py-5">
-              <h2 class="card title text-[14px] cursor-pointer font-semibold">${plant.name}</h2>
+              <h2 onclick="loadModal(${plant.id})" class="card title text-[14px] cursor-pointer font-semibold">${plant.name}</h2>
               <p class="text-[12px] lg:h-[78px]">
                ${plant.description}
               </p>
@@ -81,7 +81,45 @@ const displayTreeCards = (treeDetails) => {
 const loadTreeByCategory = (id) => {
   fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
-    .then((data) => displayTreeCards(data));
+    .then((data) => {
+      displayTreeCards(data);
+    });
 };
-
+const loadModal = (id) => {
+  fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      displayModal(data.plants);
+    });
+};
+const displayModal = (data) => {
+  const modal = document.getElementById("my_modal_5");
+  modal.innerHTML = "";
+  // console.log(data);
+  const div = document.createElement("div");
+  div.className = "modal-box";
+  div.innerHTML = `<h3 class="text-xl font-bold">${data.name}</h3>
+        <div class="w-full h-[250px] mt-[20px]">
+          <img
+            class="w-full h-full object-cover rounded-md"
+            src="${data.image}"
+            alt=""
+          />
+        </div>
+        <p class="mt-[20px]">
+          <span class="font-bold">Category:</span> ${data.category}
+        </p>
+        <p class="mt-[20px]"><span class="font-bold">Price:</span> ৳${data.price}</p>
+        <p class="mt-[20px]">
+          <span class="font-bold">Description:</span> ${data.description}
+        </p>
+        <div class="modal-action mt-[20px]">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn bg-[#15803d] text-white">Close</button>
+          </form>
+        </div>`;
+  modal.appendChild(div);
+  my_modal_5.showModal();
+};
 loadCategories();
