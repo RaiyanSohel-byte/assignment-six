@@ -1,7 +1,7 @@
 1. What is the difference between var, let, and const?
-   Ans: (i) var : 'var' is globally scoped. If we declare a variable using 'var' inside a block scope, still we can access the variable globally. It can be redeclared in the same scope.
+   Ans: (i) var : 'var' is function scoped or global scoped if declared outside a function. If we declare a variable using 'var' inside a block scope, still we can access the variable globally. It can be redeclared in the same scope.
    (ii) let: 'let' is block scoped. It can not be redeclared in the same scope but we can change the value of the variable.
-   (iii) const: 'const' is also block scoped but it can not be redeclared or it can not reassign values. We use it to store the values which we will not change further in the code.
+   (iii) const: 'const' is also block scoped but it can not be redeclared or it can not reassign values for primitive data types. We use it to store the values which we will not change further in the code.
 
 2. What is the difference between map(), forEach(), and filter()?
    Ans: (i) forEach() : It executes a function for each elements in the array. It does not create another array. Return value is undefined.
@@ -18,4 +18,4 @@
 5. Explain template literals in ES6. How are they different from string concatenation?
    Ans: Template literals are strings within back ticks(``). We can use variables in a string dynamically. We can also use multi line strings using template literals.
 
-We don't need to use extra + sign to concatenate strings. We can use `{string}` like this also we don't need to use extra \n to go to new line. It makes codes more organized and readable.
+We don't need to use extra + sign to concatenate strings. We can use ${variable} like this also we don't need to use extra \n to go to new line. It makes codes more organized and readable.
