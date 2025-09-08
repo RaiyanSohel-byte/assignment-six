@@ -139,10 +139,10 @@ let price = 0;
 const cartItems = {}; // track items with quantity
 
 const addToCart = (id) => {
-  alert("Item Added To Your Cart");
   fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
     .then((res) => res.json())
     .then((data) => {
+      alert(`${data.plants.name} Added To Your Cart`);
       const plant = data.plants;
       const cartDetails = document.getElementById("cart-details");
       const cartTreePrice = document.getElementById("cart-tree-price");
@@ -180,7 +180,7 @@ const addToCart = (id) => {
         document
           .getElementById(`delete-button-${plant.id}`)
           .addEventListener("click", () => {
-            alert("Item Removed From Your Cart");
+            alert(`${plant.name} Removed From Your Cart`);
             price -= plant.price * cartItems[plant.id].quantity;
             delete cartItems[plant.id];
             document.getElementById(`cart-div-${plant.id}`).remove();
