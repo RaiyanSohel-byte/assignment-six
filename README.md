@@ -16,6 +16,4 @@
    Example: const [one,two,three] = ["Alim","Jalim","Dalim"];
 
 5. Explain template literals in ES6. How are they different from string concatenation?
-   Ans: Template literals are strings within back ticks(``). We can use variables in a string dynamically. We can also use multi line strings using template literals.
-
-We don't need to use extra + sign to concatenate strings. We can use ${variable} like this also we don't need to use extra \n to go to new line. It makes codes more organized and readable.
+   Ans: Template literals are strings within back ticks(``). We can use variables in a string dynamically. We can also use multi line strings using template literals.We don't need to use extra + sign to concatenate strings. We can use ${variable} like this also we don't need to use extra \n to go to new line. It makes codes more organized and readable.
